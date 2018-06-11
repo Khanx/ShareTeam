@@ -57,6 +57,7 @@
     <Compile Include="Commands\Join.cs" />
     <Compile Include="Commands\Reject.cs" />
     <Compile Include="Commands\Members.cs" />
+    <Compile Include="Syncronization\Crate_Synchronization.cs" />
     <Compile Include="Syncronization\Recipe Synchronization.cs" />
     <Compile Include="Syncronization\Research Synchronization.cs" />
     <Compile Include="ShareTeam.cs" />

@@ -29,6 +29,7 @@ namespace ShareTeam.Teams
         {
             Research_Syncronization.SyncronizeResearch(player, fake_player);
             Stockpile_Synchronization.SyncronizeStockpile(player, fake_player);
+            Crate_Synchronization.SyncronizeCrates(player, fake_player);
 
             foreach(Players.Player plr in GetConnectedPlayersPlayers())
                 Pipliz.Chatting.Chat.Send(plr, string.Format("<color=green>{0} now shares his stockpile with you.</color>", player.Name));
@@ -103,6 +104,15 @@ namespace ShareTeam.Teams
 
             player.SendStockpileInventory();
             fake_player.SendStockpileInventory();
+        }
+
+        private void RemoveCratesOnLeave(Players.Player player)
+        {
+            Stockpile player_Stockpile = Stockpile.GetStockPile(player);
+            Stockpile fake_player_Stockpile = Stockpile.GetStockPile(fake_player);
+
+            foreach(Vector3Int crate in player_Stockpile._crates)
+                    fake_player_Stockpile._crates.Remove(crate);
         }
 
         //Load & saving

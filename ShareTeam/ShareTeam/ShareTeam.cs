@@ -94,20 +94,5 @@ namespace ShareTeam
                 _nextUpdate = Time.MillisecondsSinceStart + 1000;
             }
         }
-
-        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnPlayerRecipeSettingChanged, "Khanx.ShareTeam.SyncronizeRecipeSetting")]
-        public static void OnPlayerRecipeSettingChanged(RecipeStorage.PlayerRecipeStorage storage, Recipe recipe, Box<RecipeStorage.RecipeSetting> recipeSetting)
-        {
-            //If the setting changed is from a fake player
-            if(storage.Player.ID.type == NetworkID.IDType.Steam && storage.Player.ID.steamID.GetEAccountType() == Steamworks.EAccountType.k_EAccountTypeAnonUser)
-            {
-                Team team = TeamManager.GetTeamManager().GetTeamOfFakePlayer(storage.Player);
-
-                foreach(Players.Player plr in team.GetConnectedPlayersPlayers())
-                {
-                    RecipePlayer.SendRecipes(plr);  //Recipes in job (how many create) Synchronization (Depends on the stockpile)
-                }
-            }
-        }
     }
 }
