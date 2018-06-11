@@ -60,7 +60,7 @@ namespace ShareTeam.Teams
 
         public void LoadTeams()
         {
-            Log.Write("<color=green>Loading teams</color>");
+            Log.Write("<color=lime>Loading teams</color>");
             try
             {
                 JSONNode teams = JSON.Deserialize(ShareTeam.MODPATH + jsonFile);
@@ -70,9 +70,9 @@ namespace ShareTeam.Teams
             }
             catch(System.Exception e)
             {
-                Log.Write(string.Format("<color=red>Error loading teams:</color>\n{0}", e.Message));
+                Log.Write(string.Format("<color=orange>Error loading teams:</color>\n{0}", e.Message));
             }
-            Log.Write(string.Format("<color=green>{0} teams loaded</color>", this.teams.Count));
+            Log.Write(string.Format("<color=lime>{0} teams loaded</color>", this.teams.Count));
         }
 
         public void SaveTeams()
@@ -91,7 +91,7 @@ namespace ShareTeam.Teams
             }
             catch(System.Exception e)
             {
-                Log.Write(string.Format("<color=red>Error Saving teams:</color>\n{0}", e.Message));
+                Log.Write(string.Format("<color=orange>Error Saving teams:</color>\n{0}", e.Message));
             }
         }
     }

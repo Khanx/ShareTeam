@@ -27,21 +27,21 @@ namespace ShareTeam.Commands
             {
                 if(team == null)
                 {
-                    Pipliz.Chatting.Chat.Send(player, "<color=red>You do not belong to any team.</color>");
+                    Pipliz.Chatting.Chat.Send(player, "<color=orange>You do not belong to any team.</color>");
 
                     return true;
                 }
 
                 if(!activeTeamChat.Contains(player))
                 {
-                    Pipliz.Chatting.Chat.Send(player, "<color=green>Activated the automatic chat team.</color>");
+                    Pipliz.Chatting.Chat.Send(player, "<color=lime>Activated the automatic chat team.</color>");
                     activeTeamChat.Add(player);
 
                     return true;
                 }
                 else
                 {
-                    Pipliz.Chatting.Chat.Send(player, "<color=green>Desactivated the automatic chat team.</color>");
+                    Pipliz.Chatting.Chat.Send(player, "<color=lime>Desactivated the automatic chat team.</color>");
                     activeTeamChat.Remove(player);
 
                     return true;
@@ -61,7 +61,7 @@ namespace ShareTeam.Commands
             string name = player.Name;
 
             foreach(Players.Player plr in team.GetConnectedPlayersPlayers())
-                Pipliz.Chatting.Chat.Send(plr, string.Format("<color=blue>[{0}]: {1}</color>", name, chat));
+                Pipliz.Chatting.Chat.Send(plr, string.Format("<color=lightblue>[{0}]: {1}</color>", name, chat));
 
             return true;
         }

@@ -73,7 +73,7 @@ namespace ShareTeam
                             total_food_needed += ( Colony.Get(plr).FollowerCount * 5 );
 
                         foreach(Players.Player plr in team.GetConnectedPlayersPlayers())
-                            Pipliz.Chatting.Chat.Send(plr, string.Format("<color=green>Total food use/day: {0}</color>", total_food_needed));
+                            Pipliz.Chatting.Chat.Send(plr, string.Format("<color=lime>Total food use/day: {0}</color>", total_food_needed));
 
                         
                     }

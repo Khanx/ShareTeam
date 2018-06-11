@@ -32,7 +32,7 @@ namespace ShareTeam.Teams
             Crate_Synchronization.SyncronizeCrates(player, fake_player);
 
             foreach(Players.Player plr in GetConnectedPlayersPlayers())
-                Pipliz.Chatting.Chat.Send(plr, string.Format("<color=green>{0} now shares his stockpile with you.</color>", player.Name));
+                Pipliz.Chatting.Chat.Send(plr, string.Format("<color=lime>{0} now shares his stockpile with you.</color>", player.Name));
 
             playersOnTeam.Add(player.ID);
         }
@@ -76,7 +76,7 @@ namespace ShareTeam.Teams
             SplitStockpileOnLeave(player);
 
             foreach(Players.Player plr in GetConnectedPlayersPlayers())
-                Pipliz.Chatting.Chat.Send(plr, string.Format("<color=red>{0} has stopped sharing his stockpile with you and have taken 1/{1} of the stockpile</color>", player.Name, (playersOnTeam.Count + 1) ));
+                Pipliz.Chatting.Chat.Send(plr, string.Format("<color=orange>{0} has stopped sharing his stockpile with you and have taken 1/{1} of the stockpile</color>", player.Name, (playersOnTeam.Count + 1) ));
 
             if(playersOnTeam.Count == 0)
                 TeamManager.GetTeamManager().RemoveTeam(this);
@@ -119,7 +119,7 @@ namespace ShareTeam.Teams
         public Team(JSONNode json)
         {
             if(!json.TryGetAs<uint>("fake_playerID", out uint fake_playerID))
-                Log.Write("<color=red>Error loading the fake_playerID</color>");
+                Log.Write("<color=orange>Error loading the fake_playerID</color>");
 
             fake_player = Players.GetPlayer(new NetworkID(new Steamworks.CSteamID(new Steamworks.AccountID_t(fake_playerID), Steamworks.EUniverse.k_EUniversePublic, Steamworks.EAccountType.k_EAccountTypeAnonUser)));
             this.fake_playerID = fake_playerID;
@@ -127,7 +127,7 @@ namespace ShareTeam.Teams
             playersOnTeam = new List<NetworkID>();
 
             if(!json.TryGetChild("players", out JSONNode players))
-                Log.Write("<color=red>Error loading the players</color>");
+                Log.Write("<color=orange>Error loading the players</color>");
 
             foreach(var player in players.LoopArray())
                 playersOnTeam.Add(NetworkID.Parse(player.GetAs<string>()));

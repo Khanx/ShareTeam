@@ -24,14 +24,14 @@ namespace ShareTeam.Commands
 
             if(null == team)
             {
-                Pipliz.Chatting.Chat.Send(player, "<color=red>You do not belong to any team.</color>");
+                Pipliz.Chatting.Chat.Send(player, "<color=orange>You do not belong to any team.</color>");
 
                 return true;
             }
 
             team.RemovePlayer(player);
             
-            Pipliz.Chatting.Chat.Send(player, "<color=green>You have left the team.</color>");
+            Pipliz.Chatting.Chat.Send(player, "<color=lime>You have left the team.</color>");
 
             return true;
         }

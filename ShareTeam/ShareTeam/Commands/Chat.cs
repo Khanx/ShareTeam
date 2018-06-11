@@ -22,7 +22,7 @@ namespace ShareTeam.Commands
 
             if(null == team)
             {
-                Pipliz.Chatting.Chat.Send(player, "<color=red>You do not belong to any team.</color>");
+                Pipliz.Chatting.Chat.Send(player, "<color=orange>You do not belong to any team.</color>");
 
                 return true;
             }
@@ -30,7 +30,7 @@ namespace ShareTeam.Commands
             string name = player.Name;
 
             foreach(Players.Player plr in team.GetConnectedPlayersPlayers())
-                Pipliz.Chatting.Chat.Send(plr, string.Format("<color=blue>[{0}]: {1}</color>", name, chat.Substring(4)));
+                Pipliz.Chatting.Chat.Send(plr, string.Format("<color=lightblue>[{0}]: {1}</color>", name, chat.Substring(4)));
 
             return true;
         }

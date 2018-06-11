@@ -45,7 +45,7 @@ namespace ShareTeam.Syncronization
 
             if(null == fake_plrinProgressResearch)
             {
-                Log.Write("<color=green>Research from player to fakeplayer</color>");
+                Log.Write("<color=lime>Research from player to fakeplayer</color>");
                 fake_player_ScienceManager.GetType().GetField("inProgressResearch", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(fake_player_ScienceManager, plrinProgressResearch);
 
                 foreach(ResearchProgress rp in plrinProgressResearch)
@@ -59,7 +59,7 @@ namespace ShareTeam.Syncronization
 
             if(null == plrinProgressResearch)
             {
-                Log.Write("<color=green>Research from fake_player to player</color>");
+                Log.Write("<color=lime>Research from fake_player to player</color>");
                 player_ScienceManager.GetType().GetField("inProgressResearch", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(player_ScienceManager, fake_plrinProgressResearch);
 
                 foreach(ResearchProgress rp in fake_plrinProgressResearch)
@@ -94,7 +94,7 @@ namespace ShareTeam.Syncronization
                     fake_plrinProgressResearch.Add(rpPlr);
             }
 
-            Log.Write("<color=green>Synchronization</color>");
+            Log.Write("<color=lime>Synchronization</color>");
 
             //Fake player synchronization
             fake_player_ScienceManager.GetType().GetField("inProgressResearch", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(fake_player_ScienceManager, fake_plrinProgressResearch);

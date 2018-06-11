@@ -21,7 +21,7 @@ namespace ShareTeam.Commands
 
             if(args.Length == 1)
             {
-                Pipliz.Chatting.Chat.Send(player, "<color=red>You need to specify the player to accept.</color>");
+                Pipliz.Chatting.Chat.Send(player, "<color=orange>You need to specify the player to accept.</color>");
 
                 return true;
             }
@@ -30,14 +30,14 @@ namespace ShareTeam.Commands
 
             if(!Players.TryMatchName(name, out Players.Player wantToJoin_byNAME))
             {
-                Pipliz.Chatting.Chat.Send(player, string.Format("<color=red>Player {0} not found.</color>", name));
+                Pipliz.Chatting.Chat.Send(player, string.Format("<color=orange>Player {0} not found.</color>", name));
 
                 return true;
             }
 
             if(!Join.joinTo.TryGetValue(player, out Players.Player wantToJoin) || wantToJoin != wantToJoin_byNAME)
             {
-                Pipliz.Chatting.Chat.Send(player, string.Format("<color=red>Player {0} has not requested to share with you.</color>", name));
+                Pipliz.Chatting.Chat.Send(player, string.Format("<color=orange>Player {0} has not requested to share with you.</color>", name));
 
                 return true;
             }
@@ -47,7 +47,7 @@ namespace ShareTeam.Commands
 
             if(null != team1 && null != team2)
             {
-                Pipliz.Chatting.Chat.Send(player, "<color=red> Both of you are sharing with more people, one have to stop sharing.</color>");
+                Pipliz.Chatting.Chat.Send(player, "<color=orange> Both of you are sharing with more people, one have to stop sharing.</color>");
 
                 Join.joinTo.Remove(player);
                 return true;
@@ -67,7 +67,7 @@ namespace ShareTeam.Commands
                 team.AddPlayer(wantToJoin);
             }
 
-            Pipliz.Chatting.Chat.Send(player, string.Format("<color=green>Now you shares your stockpile with {0}</color>", name));
+            Pipliz.Chatting.Chat.Send(player, string.Format("<color=lime>Now you shares your stockpile with {0}</color>", name));
 
             Join.joinTo.Remove(player);
 
