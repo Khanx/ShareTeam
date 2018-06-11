@@ -14,14 +14,6 @@ namespace ShareTeam
     {
         public static long _nextUpdate;
 
-        public static string MODPATH { get; internal set; }
-
-        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnAssemblyLoaded, "Khanx.ShareTeam.GetModPath")]
-        public static void GetModPath(string path)
-        {
-            MODPATH = System.IO.Path.GetDirectoryName(path).Replace("\\", "/");
-        }
-
         [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterWorldLoad, "Khanx.ShareTeam.Harmony")]
         public static void Start()
         {
@@ -37,7 +29,7 @@ namespace ShareTeam
         [ModLoader.ModCallback(ModLoader.EModCallbackType.OnQuit, "Khanx.ShareTeam.Save")]
         public static void Save()
         {
-            Log.Write("Saving teams");
+            Log.Write("<color=lime>Saving teams</color>");
             TeamManager.GetTeamManager().SaveTeams();
         }
 
@@ -74,8 +66,6 @@ namespace ShareTeam
 
                         foreach(Players.Player plr in team.GetConnectedPlayersPlayers())
                             Pipliz.Chatting.Chat.Send(plr, string.Format("<color=lime>Total food use/day: {0}</color>", total_food_needed));
-
-                        
                     }
 
                     nextDay = false;

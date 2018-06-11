@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.IO;
 using Pipliz;
 using Pipliz.JSON;
 
@@ -10,7 +10,7 @@ namespace ShareTeam.Teams
         private static TeamManager instance;
         private List<Team> teams;
 
-        private static string jsonFile = "/teams.json";
+        private static string jsonFilePath;
 
         private TeamManager()
         {
@@ -60,10 +60,14 @@ namespace ShareTeam.Teams
 
         public void LoadTeams()
         {
+            jsonFilePath = "./gamedata/savegames/" + ServerManager.WorldName + "/teams.json";
             Log.Write("<color=lime>Loading teams</color>");
             try
             {
-                JSONNode teams = JSON.Deserialize(ShareTeam.MODPATH + jsonFile);
+                if(!File.Exists(jsonFilePath))
+                    return;
+
+                JSONNode teams = JSON.Deserialize(jsonFilePath);
 
                 foreach(JSONNode team in teams.LoopArray())
                     new Team(team);
@@ -79,15 +83,20 @@ namespace ShareTeam.Teams
         {
             try
             {
+                File.Delete(jsonFilePath);
+
                 if(teams.Count == 0)
-                    Log.Write("<color=blue>No teams to save</color>");
+                {
+                    Log.Write("<color=lime>No teams to save</color>");
+                    return;
+                }
 
                 JSONNode json = new JSONNode(NodeType.Array);
 
                 foreach(Team team in teams)
                     json.AddToArray(team.GetSaveJSON());
 
-                JSON.Serialize(ShareTeam.MODPATH + jsonFile, json, 2);
+                JSON.Serialize(jsonFilePath, json, 2);
             }
             catch(System.Exception e)
             {
