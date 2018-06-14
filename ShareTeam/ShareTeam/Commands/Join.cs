@@ -70,7 +70,7 @@ namespace ShareTeam.Commands
             joinTo.Add(join_to_player, player);
 
             Pipliz.Chatting.Chat.Send(join_to_player, string.Format("<color=lime>{0} has requested to join your team, write /accept_team {0} or /reject_team {0}</color>", player.Name));
-            Pipliz.Chatting.Chat.Send(join_to_player, string.Format("<color=yellow>{0} will be rejected in 30s if you do not answer</color>", player.Name));
+            Pipliz.Chatting.Chat.Send(join_to_player, string.Format("<color=yellow>{0} will be rejected in a minute if you do not answer</color>", player.Name));
 
             Pipliz.Chatting.Chat.Send(player, string.Format("<color=lime>You have requested to join {0} team</color>", name));
 
@@ -84,7 +84,7 @@ namespace ShareTeam.Commands
                     joinTo.Remove(join_to_player);
                 }
 
-            }, 30);
+            }, 60);
 
             return true;
         }
