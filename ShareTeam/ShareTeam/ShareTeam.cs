@@ -14,7 +14,7 @@ namespace ShareTeam
     {
         public static long _nextUpdate;
 
-        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterWorldLoad, "Khanx.ShareTeam.Harmony")]
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterWorldLoad, "Khanx.ShareTeam.Start")]
         public static void Start()
         {
             var harmony = HarmonyInstance.Create("Khanx.ShareTeam.Harmony");
