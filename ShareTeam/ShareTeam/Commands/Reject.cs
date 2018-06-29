@@ -1,6 +1,6 @@
 ﻿using ChatCommands;
 using System;
-
+using System.Text.RegularExpressions;
 
 namespace ShareTeam.Commands
 {
@@ -16,16 +16,27 @@ namespace ShareTeam.Commands
 
         public bool TryDoCommand(Players.Player player, string chat)
         {
-            string[] args = CommandManager.SplitCommand(chat);
-
-            if(args.Length == 1)
+            Match m = Regex.Match(chat, @"/reject_team (?<playername>['].+?[']|[^ ]+)");
+            if(!m.Success)
             {
-                Pipliz.Chatting.Chat.Send(player, "<color=orange>You need to specify the player to reject.</color>");
-
+                Pipliz.Chatting.Chat.Send(player, "<color=orange>Command didn't match, use /reject_team [playername]</color>");
                 return true;
             }
 
-            string name = args[1];
+            string name = m.Groups["playername"].Value;
+
+            if(name.StartsWith("'"))
+            {
+                if(name.EndsWith("'"))
+                {
+                    name = name.Substring(1, name.Length - 2);
+                }
+                else
+                {
+                    Pipliz.Chatting.Chat.Send(player, "<color=orange>Command didn't match, missing ' after playername</color>");
+                    return true;
+                }
+            }
 
             if(!Players.TryMatchName(name, out Players.Player wantToJoin_byNAME))
             {

@@ -12,7 +12,6 @@ namespace ShareTeam.Commands
             if(chat.Equals("/leave_team", StringComparison.OrdinalIgnoreCase))
                 return true;
 
-
             return false;
         }
 

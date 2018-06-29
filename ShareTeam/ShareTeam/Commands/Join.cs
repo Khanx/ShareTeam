@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Text.RegularExpressions;
 using ChatCommands;
 
 using ShareTeam.Teams;
@@ -17,22 +17,32 @@ namespace ShareTeam.Commands
             if(chat.StartsWith("/join_team", StringComparison.OrdinalIgnoreCase))
                 return true;
 
-
             return false;
         }
 
         public bool TryDoCommand(Players.Player player, string chat)
         {
-            string[] args = CommandManager.SplitCommand(chat);
-
-            if(args.Length == 1)
+            Match m = Regex.Match(chat, @"/join_team (?<playername>['].+?[']|[^ ]+)");
+            if(!m.Success)
             {
-                Pipliz.Chatting.Chat.Send(player, "<color=orange>You have to specify the player with whom you are going to make/join a team the stockpile.</color>");
-
+                Pipliz.Chatting.Chat.Send(player, "<color=orange>Command didn't match, use /join_team [playername]</color>");
                 return true;
             }
 
-            string name = args[1];
+            string name = m.Groups["playername"].Value;
+
+            if(name.StartsWith("'"))
+            {
+                if(name.EndsWith("'"))
+                {
+                    name = name.Substring(1, name.Length - 2);
+                }
+                else
+                {
+                    Pipliz.Chatting.Chat.Send(player, "<color=orange>Command didn't match, missing ' after playername</color>");
+                    return true;
+                }
+            }
 
             if(!Players.TryMatchName(name, out Players.Player join_to_player))
             {
