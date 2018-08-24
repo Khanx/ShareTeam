@@ -89,6 +89,8 @@ namespace ShareTeam.Teams
 
             int split = playersOnTeam.Count + 1;
 
+            player_Stockpile._items.Clear();
+
             for(ushort item = 0; item < ItemTypes.IndexLookup.MaxRegistered; item++)
             {
                 int amount = fake_player_Stockpile.AmountContained(item);
